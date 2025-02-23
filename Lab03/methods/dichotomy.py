@@ -1,7 +1,7 @@
 import numpy as np
 
 class DichotomySearch:
-    def __init__(self, func, start, end, eps=1e-5):
+    def __init__(self, func, start, end, eps):
         self._func = func
         self._start = start
         self._end = end
@@ -52,6 +52,8 @@ class DichotomySearch:
         iteration = 0
 
         while True:
+            iteration += 1
+
             x1 = (b + a - delta) / 2
             x2 = (b + a + delta) / 2
             
@@ -69,10 +71,9 @@ class DichotomySearch:
                 else:
                     a = x1
 
-            iteration += 1
             epsilon_n = (b - a) / 2
 
             if epsilon_n < self.eps:
                 break
 
-        return (a + b) / 2
+        return (a + b) / 2, iteration
